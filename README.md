@@ -4,6 +4,7 @@ A repository that hosts my Golang Projects
 ## List of the projects to be created:
 1. Simple Web Server
 2. CRUD API
+![plot](./crud-api-proj/block_diagram.png)
 3. MYSQL Book Management System
 4. SlackBot To Calculate Age
 5. Slackbot for File Uploading
