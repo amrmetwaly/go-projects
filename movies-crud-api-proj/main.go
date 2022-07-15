@@ -72,7 +72,9 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 	//loop over movies, range
 	for idx, movie := range movies {
 		if movie.ID == params["id"] {
+			//delete the movie with the id that you've sent
 			movies = append(movies[:idx], movies[idx+1:]...)
+			//add a new movie - the movie that we send in the body postman
 			var movie Movie
 			_ = json.NewDecoder(r.Body).Decode(&movie)
 			movie.ID = params["id"]
@@ -80,9 +82,6 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 			json.NewEncoder(w).Encode(movie)
 		}
 	}
-
-	//delete the movie with the id that you've sent
-	//add a new movie - the movie that we send in the body postman
 
 }
 
@@ -96,7 +95,7 @@ func main() {
 	r.HandleFunc("/movies", getMovies).Methods("GET")
 	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
 	r.HandleFunc("/movies", createMovie).Methods("POST")
-	r.HandleFunc("/movies/{id}", updateMovie).Methods("GET")
+	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
 	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
 
 	fmt.Printf("Starting server on port 8000\n")
