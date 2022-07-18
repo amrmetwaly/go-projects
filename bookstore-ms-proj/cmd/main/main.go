@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/amrmetwaly/bookstore-ms-proj/pkg/routes"
+	"github.com/amrmetwaly/go-projects/bookstore-ms-proj/pkg/routes"
 	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
