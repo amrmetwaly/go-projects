@@ -1,21 +1,21 @@
 package models
 
 import (
-	"github.com/amrmetwaly/bookstore-ms-proj/config"
+	"github.com/amrmetwaly/go-projects/bookstore-ms-proj/pkg/config"
 	"github.com/jinzhu/gorm"
 )
 
 var db *gorm.DB
 
 type Book struct {
-	gorm.model
+	gorm.Model
 	Name        string `gorm:""json:"name"`
 	Author      string `json:author`
 	Publication string `json:"publication"`
 }
 
 func init() {
-	config.Conenct()
+	config.Connect()
 	db = config.GetDB()
 	db.AutoMigrate(&Book{})
 }
@@ -27,8 +27,8 @@ func (b *Book) CreateBook() *Book {
 }
 func GetAllBooks() []Book {
 	var Book []Book
-	db.Find(&Books)
-	return Books
+	db.Find(&Book)
+	return Book
 }
 func GetBookById(Id int64) (*Book, *gorm.DB) {
 	var getBook Book

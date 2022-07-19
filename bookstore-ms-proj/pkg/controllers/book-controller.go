@@ -3,8 +3,8 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/amrmetwaly/bookstore-ms-proj/pkg/models"
-	"github.com/amrmetwaly/bookstore-ms-proj/pkg/utils"
+	"github.com/amrmetwaly/go-projects/bookstore-ms-proj/pkg/models"
+	"github.com/amrmetwaly/go-projects/bookstore-ms-proj/pkg/utils"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -17,12 +17,12 @@ func GetBook(w http.ResponseWriter, r *http.Request) {
 	res, _ := json.Marshal(newBooks)
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
-	w.WriteHeader(res)
+	w.Write(res)
 }
 
 func GetBookById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	bookId := vars("bookId")
+	bookId := vars["bookId"]
 	ID, err := strconv.ParseInt(bookId, 0, 0)
 	if err != nil {
 		fmt.Println("Error while parsing")
@@ -30,16 +30,16 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 	bookDetails, _ := models.GetBookById(ID)
 	res, _ := json.Marshal(bookDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
-	w.WriteHeader(http.StatusOk)
+	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
 
 func CreateBook(w http.ResponseWriter, r *http.Request) {
-	CreateBook := &models.Book()
+	CreateBook := &models.Book{}
 	utils.ParseBody(r, CreateBook)
 	b := CreateBook.CreateBook()
-	res, _ = json.Marshal(b)
-	w.WriterHeader(http.StatusOK)
+	res, _ := json.Marshal(b)
+	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
 
@@ -51,9 +51,9 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error while parsing (DELETE Book)")
 	}
 	book := models.DeleteBook(ID)
-	res, _ = json.Marshal(book)
+	res, _ := json.Marshal(book)
 	w.Header().Set("Content-Type", "pkglication/json")
-	w.WrtiteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
 
@@ -82,6 +82,6 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	db.Save(&bookDetails)
 	res, _ := json.Marshal(bookDetails)
 	w.Header().Set("Content-Type", "pkglication/json")
-	w.WriterHeader(http.StatusOK)
-	w.Writer(res)
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
 }
