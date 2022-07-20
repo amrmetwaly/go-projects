@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/amrmetwaly/go-projects/go-fiber-crm-basic/database"
-	"github.com/amrmetwaly/go-projects/go-fiber-crm-basic/lead"
+	"github.com/amrmetwaly/go-fiber-crm-basic/database"
+	"github.com/amrmetwaly/go-fiber-crm-basic/lead"
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
